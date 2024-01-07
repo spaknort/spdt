@@ -8,7 +8,7 @@ import { BuildOptions } from './types/types'
 export const pluginsWebpack = (options: BuildOptions): webpack.Configuration['plugins'] => {
     return [
         new HtmlWebpackPlugin({
-            filename: options.paths.html
+            template: options.paths.html
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',

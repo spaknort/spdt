@@ -7,13 +7,14 @@ interface VariablesENV {
 }
 
 export default (env: VariablesENV) => {
-    return buildWebpack({
+    return buildWebpack ({
         mode: env.mode,
         port: env.port,
         paths: {
             src: path.resolve(__dirname, 'src'),
             output: path.resolve(__dirname, 'dist'),
             index: path.resolve(__dirname, 'src', 'index.tsx'),
+            public: path.resolve(__dirname, 'public'),
             html: path.resolve(__dirname, 'public', 'index.html')
         }
     })   

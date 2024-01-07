@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Start } from '@/pages/start'
 import { Index } from '@/pages/index'
 
-const App: FC = () => {
+export const App: FC = () => {
     return (
         <BrowserRouter>
             <Routes>
@@ -13,5 +13,3 @@ const App: FC = () => {
         </BrowserRouter>
     )
 }
-
-export default App

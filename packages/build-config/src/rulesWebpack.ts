@@ -22,14 +22,7 @@ export const rulesWebpack = (options: BuildOptions): ModuleOptions['rules'] => {
         },
         {
             test: /\.sass/,
-            use: [
-                { loader: MiniCssExtractPlugin.loader },
-                { loader: 'css-modules-typescript-loader' },
-                { loader: 'css-loader', options: {
-                    module: true
-                }},
-                { loader: 'sass-loader' }
-            ]        
+            use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']        
         },
         {
             test: /\.svg$/i,
