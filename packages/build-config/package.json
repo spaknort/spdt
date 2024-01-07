@@ -1,5 +1,5 @@
 {
-  "name": "build-config",
+  "name": "@packages/build-config",
   "version": "1.0.0",
   "main": "./src/index.ts",
   "devDependencies": {
@@ -17,9 +17,7 @@
     "typescript": "^5.2.2",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
-  },
-  "dependencies": {
+    "webpack-dev-server": "^4.15.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "copy-webpack-plugin": "^11.0.0",
     "fork-ts-checker-webpack-plugin": "^9.0.0",
