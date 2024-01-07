@@ -9,7 +9,8 @@
   "license": "ISC",
   "dependencies": {
     "react-router-dom": "^6.16.0",
-    "@package/build-config": "*"
+    "@packages/build-config": "*",
+    "@packages/shared": "*"
   },
   "devDependencies": {
     "@types/react": "^18.2.25",
