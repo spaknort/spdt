@@ -1,9 +1,9 @@
 {
-  "name": "market",
+  "name": "admin",
   "version": "1.0.0",
   "main": "./src/index.tsx",
   "scripts": {
-    "start": "webpack serve --env mode=development port=3000",
+    "start": "webpack serve --env mode=development port=3001",
     "dev": "webpack --env mode=development",
     "build": "webpack --env mode=production"
   },

@@ -4,7 +4,7 @@ import './index.sass'
 export const Start: FC = () => {
     return (
         <div className="start">
-            Market
+            Platform
         </div>
     )
 }
