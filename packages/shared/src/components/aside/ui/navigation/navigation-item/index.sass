@@ -1,0 +1,25 @@
+.aside__nav-item
+    display: flex
+    align-items: center
+    column-gap: 12px
+    font-size: 1rem
+    font-weight: 500
+    padding: 10px 0
+    position: relative
+
+.aside__nav-item:after
+    content: ''
+    width: 3px
+    height: 80%
+    display: block
+    position: absolute
+    right: 0
+    top: 50%
+    transform: translateY(-50%)
+    background-color: #7551FF
+    border-radius: 100px
+    opacity: 0
+    transition: linear 1s
+
+.aside__nav-item:hover:after
+    opacity: 1
