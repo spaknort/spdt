@@ -5,6 +5,7 @@ import { Navigation } from './navigation'
 import { Colours } from '@packages/shared'
  
 interface AsideItem {
+    id: number,
     svg: any,
     title: string
 }

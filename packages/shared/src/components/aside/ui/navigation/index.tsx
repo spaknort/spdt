@@ -3,6 +3,7 @@ import './index.sass'
 import { NavigationItem } from './navigation-item'
 
 interface NavigationItem {
+    id: number,
     svg: any,
     title: string
 }
@@ -16,7 +17,7 @@ export const Navigation: FC<NavigationProps> = ({ items }) => {
         <nav className="aside__nav">
             {
                 items.map(item => (
-                    <NavigationItem svg={item.svg} title={item.title} />
+                    <NavigationItem key={String( Date.now() * item.id )} svg={item.svg} title={item.title} />
                 ))
             }
         </nav>

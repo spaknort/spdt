@@ -1,4 +1,4 @@
-import { Title, TitleSizes } from '@packages/shared'
+import { Button, ButtonSizes, ButtonTypes, Title, TitleSizes } from '@packages/shared'
 import React from 'react'
 import { Colours } from '@packages/shared'
 import './index.sass'
@@ -28,7 +28,7 @@ export const ProductCart: React.FC<ProductCartProps> = ({ title, author, avatar,
             </div>
             <div className="product-cart__price">
                 <p style={{ color: Colours.text_color }} className="product-cart__price-text">Current Bid: { price } RUB</p>
-                <input type="button" style={{ backgroundColor: Colours.active_color, color: Colours.text_color }} className='product-cart__btn' value="Place Bid" />
+                <Button value='Place Bid' type={ButtonTypes.active} size={ButtonSizes.small}  />
             </div>
         </figure>
     )
