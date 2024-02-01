@@ -2,6 +2,8 @@ import { Button, ButtonSizes, ButtonTypes, Title, TitleSizes } from '@packages/s
 import React from 'react'
 import { Colours } from '@packages/shared'
 import './index.sass'
+import FavoriteButton from '@/shared/ui/favorites-button'
+import { FavoriteButtonTypes } from '@/shared/lib/enums/FavoriteButtonTypes'
 
 interface ProductCartProps {
     title: string,
@@ -16,6 +18,7 @@ export const ProductCart: React.FC<ProductCartProps> = ({ title, author, avatar,
         <figure style={{ backgroundColor: Colours.block_color }} className="product-cart">
             <div style={{ backgroundColor: Colours.background_color }} className="product-cart__img-block">
                 <img src={ preview } alt="" className="product-cart__img" />
+                <FavoriteButton className='favoriteButton'  type={FavoriteButtonTypes.productCart} />
             </div>
             <div className="product-cart__info">
                 <section className="product-cart__section">

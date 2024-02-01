@@ -1,4 +1,4 @@
-import React, { EventHandler, useRef, useState } from "react"
+import React, { EventHandler, useEffect, useRef, useState } from "react"
 import { SvgSelector } from "@/shared/ui/svgSelector"
 import { svgNames } from "@/shared/lib/enums/svgNames"
 import { Colours } from "@packages/shared"
@@ -16,6 +16,14 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({ item }) => {
     const [itemState, setItemState] = useState<boolean>(false)
     const listRef = useRef<HTMLUListElement | null>(null)
 
+    useEffect(() => {
+        if (listRef == null) return
+        const listRefCurrent = listRef.current;
+        
+        (itemState) ? listRefCurrent.style.maxHeight = listRefCurrent.scrollHeight + 'px':
+        listRefCurrent.style.maxHeight = '0px'
+    }, [itemState])
+
     return (
         <li className="dropdown__item">
             <div className="dropdown__drop" onClick={() => {
@@ -27,7 +35,7 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({ item }) => {
                 </div>
                 <SvgSelector svgName={svgNames.dropDownArrow} params={{ width: 24, height: 24, fill: '', stroke: Colours.text_color }} />
             </div>
-            <ul className={"dropdown__list"}>
+            <ul ref={listRef} className={"dropdown__list"}>
                 {
                     item.content.map(sub_item => {
                         return (

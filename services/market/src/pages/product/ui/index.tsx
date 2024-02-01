@@ -5,6 +5,8 @@ import { SvgSelector } from "@/shared/ui/svgSelector"
 import { svgNames } from "@/shared/lib/enums/svgNames"
 import { Warrning } from "@/entities/warring"
 import { DropDown } from "@/entities/dropdown"
+import FavoriteButton from "@/shared/ui/favorites-button"
+import { FavoriteButtonTypes } from "@/shared/lib/enums/FavoriteButtonTypes"
 
 export const Product: FC = () => {
     return (
@@ -35,19 +37,14 @@ export const Product: FC = () => {
                                     { key: 'Комиссия платформы', value: '1%' }
                                 ]
                             },
-                            // {
-                            //     svgName: svgNames.profile,
-                            //     value: 'Описание',
-                            //     content: [
-                            //         { key: 'Категория', value: 'Design' },
-                            //         { key: 'Создатель', value: '7EC' },
-                            //         { key: 'Владелец', value: 'Will Smith' },
-                            //         { key: 'Адрес контракта', value: '0x8e6c...4c19' },
-                            //         { key: 'ID токена', value: '1354800000343' },
-                            //         { key: 'Роялти', value: '9.9%' },
-                            //         { key: 'Комиссия платформы', value: '1%' }
-                            //     ]
-                            // }
+                            {
+                                svgName: svgNames.profile,
+                                value: 'Описание',
+                                content: [
+                                    { key: '960 x 960 px.IMAGE(30.42MB)', value: '' },
+                                    { key: 'Bitcoin Trading UP _ BTC', value: '' }
+                                ]
+                            }
                         ]} />
                     </div>
                     <div className="main__right">
@@ -55,6 +52,14 @@ export const Product: FC = () => {
                             <div className="product__section">
                                 <Title style={{ color: Colours.active_color }} value="Esthera Jackson" size={TitleSizes.small} />
                                 <Title value="Abstract Colors" size={TitleSizes.large} />
+                            </div>
+                            <div className="prdouct__additional">
+                                <div className="product_favorites">
+                                    <FavoriteButton type={FavoriteButtonTypes.product} />
+                                    <span className="product__favorites-count" style={{ color: Colours.text_color }}>4</span>
+                                </div>
+                                <SvgSelector svgName={svgNames.shared} params={{ width: 18, height: 18, fill: '#848E9C', stroke: '#848E9C' }} />
+                                <SvgSelector svgName={svgNames.productMenu} params={{ width: 22, height: 22, fill: '#848E9C', stroke: '#848E9C' }} />
                             </div>
                         </div>
                         <div className="product__price-block">
