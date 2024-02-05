@@ -7,10 +7,11 @@ interface ButtonProps {
     type: ButtonTypes,
     size: ButtonSizes,
     styles?: CSSProperties,
+    disabled?: boolean,
     onClick?: () => void
 }
 
-export const Button: React.FC<ButtonProps> = ({ value, type, size, styles, onClick }) => {
+export const Button: React.FC<ButtonProps> = ({ value, type, size, styles, disabled, onClick }) => {
     const localStyle: CSSProperties = {
         backgroundColor: (type == ButtonTypes.active) ? Colours.active_color:
             (type == ButtonTypes.inactive) ? 'transparent': '',
@@ -23,6 +24,6 @@ export const Button: React.FC<ButtonProps> = ({ value, type, size, styles, onCli
     }
 
     return (
-        <input onClick={onClick} style={{ ...localStyle, ...styles }} className={'button button_' + size} type="button" value={value} />
+        <input disabled={disabled} onClick={onClick} style={{ ...localStyle, ...styles }} className={'button button_' + size} type="button" value={value} />
     )
 }

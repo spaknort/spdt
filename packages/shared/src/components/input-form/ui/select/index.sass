@@ -1,0 +1,73 @@
+.custom-select 
+    position: relative
+    width: 100%
+    font-size: 1rem
+    color: #A3AED0
+    margin-top: 12px
+
+.select-button 
+    width: 100%
+    display: flex
+    justify-content: space-between
+    align-items: center
+    font-size: 1rem
+    background-color: transparent
+    padding: 18px 24px
+    border: 1px solid rgba(255, 255, 255, .2)
+    border-radius: 16px
+    cursor: pointer
+
+.selected-value 
+    text-align: left
+    color: #A3AED0
+
+.arrow 
+    border-left: 5px solid transparent
+    border-right: 5px solid transparent
+    border-top: 5px solid #A3AED0
+    transition: transform linear .7s
+
+.select-dropdown 
+    position: absolute
+    width: 100%
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2)
+    border-radius: 4px
+    padding: 10px
+    margin-top: 10px
+    transition: .7s ease
+
+.select-dropdown li 
+    position: relative
+    cursor: pointer
+    display: flex
+    padding: 4px
+
+.select-dropdown li label 
+    width: 100%
+    padding: 8px 10px
+    cursor: pointer
+
+.select-dropdown li:hover,
+.select-dropdown input:checked ~ label 
+    background-color: #111C44
+
+.select-dropdown input:focus ~ label 
+    background-color: #111C44
+
+.select-dropdown input[type="radio"]
+    position: absolute
+    left: 0
+    opacity: 0
+
+.select-dropdown 
+    transform: scaleY(0)
+    opacity: 0
+    visibility: hidden
+
+.custom-select.active .arrow 
+    transform: rotate(180deg)
+
+.custom-select.active .select-dropdown 
+    opacity: 1
+    visibility: visible
+    transform: scaleY(1)

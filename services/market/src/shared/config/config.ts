@@ -2,6 +2,6 @@ export enum LocalRoutes {
     start = '/',
     product = '/product',
     profile = '/profile',
-    registration = '/reg',
+    signUp = '/sign-up',
     signIn = '/sign-in'
 }

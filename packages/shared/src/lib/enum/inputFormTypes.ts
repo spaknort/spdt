@@ -1,5 +1,7 @@
 export enum InputFormTypes {
     password = 'password',
     text = 'text',
-    email = 'email'
+    email = 'email',
+    selector = 'selector',
+    tel = 'tel'
 }

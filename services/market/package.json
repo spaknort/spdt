@@ -10,6 +10,7 @@
   "dependencies": {
     "@packages/build-config": "*",
     "@packages/shared": "*",
+    "react-redux": "^9.0.2",
     "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
