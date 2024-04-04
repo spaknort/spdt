@@ -3,6 +3,7 @@ import './index.sass'
 import { Logo } from './logo'
 import { Navigation } from './navigation'
 import { Colours } from '@packages/shared'
+import { INavigationItem } from '@/shared/lib/interfaces/INavigationItem'
  
 interface AsideItem {
     id: number,
@@ -11,7 +12,7 @@ interface AsideItem {
 }
 
 interface AsideProps {
-    items?: Array<AsideItem>
+    items?: Array<INavigationItem>
 }
 
 export const Aside: FC<AsideProps> = ({ items }) => {

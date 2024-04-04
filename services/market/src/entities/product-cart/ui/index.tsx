@@ -17,7 +17,7 @@ export const ProductCart: React.FC<ProductCartProps> = ({ title, author, avatar,
     return (
         <figure style={{ backgroundColor: Colours.block_color }} className="product-cart">
             <div style={{ backgroundColor: Colours.background_color }} className="product-cart__img-block">
-                <img src={ preview } alt="" className="product-cart__img" />
+                <img src={ preview } alt="" draggable={false} className="product-cart__img" />
                 <FavoriteButton className='favoriteButton'  type={FavoriteButtonTypes.productCart} />
             </div>
             <div className="product-cart__info">
@@ -26,7 +26,7 @@ export const ProductCart: React.FC<ProductCartProps> = ({ title, author, avatar,
                     <p className="product-cart__sub-title">By { author }</p>
                 </section>
                 <div style={{ backgroundColor: Colours.background_color }} className="product-cart__mini-avatar-block">
-                    <img src={ avatar } alt="Mini Avatar" className="product-cart__mini-avatar" />
+                    <img src={ avatar } alt="Mini Avatar" draggable={false} className="product-cart__mini-avatar" />
                 </div>
             </div>
             <div className="product-cart__price">

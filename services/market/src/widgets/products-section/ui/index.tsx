@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import './index.sass'
 import { Title, TitleSizes } from '@packages/shared'
 import { ProductCart } from '@/entities/product-cart'
@@ -7,10 +7,11 @@ import { ProductsSectionTypes } from '@/shared/lib/enums/ProductsSectionTypes'
 interface ProductsSectionProps {
     title: string,
     numberOfDisplayedProducts: number,
+    scrollSpeed?: number,
     type: ProductsSectionTypes
 }
 
-export const ProductsSection: React.FC<ProductsSectionProps> = ({ title, numberOfDisplayedProducts, type }) => {
+export const ProductsSection: React.FC<ProductsSectionProps> = ({ title, numberOfDisplayedProducts = 2, scrollSpeed = 1, type }) => {
     const trendingProducts = [
         {
             id: 1,
@@ -121,15 +122,38 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ title, numberO
     ]
     const products = (type == ProductsSectionTypes.recently) ? recentlyProducts: trendingProducts
 
+    const cardsRef = useRef<HTMLDivElement | null>(null)
+
+    useEffect(() => {
+        if (!cardsRef) return
+
+        let mouseDownFlag = false
+        let currentX = 0
+        const cardsElem = cardsRef.current
+
+        document.addEventListener('mouseup', () => mouseDownFlag = false)
+        cardsElem.addEventListener('mousedown', (e: MouseEvent) => {
+            currentX = (e.clientX * (1 + scrollSpeed / 10))
+            mouseDownFlag = true
+        })
+        cardsElem.addEventListener('mousemove', (e: MouseEvent) => {
+            if (mouseDownFlag) {
+                cardsElem.scrollBy(currentX - (e.clientX * (1 + scrollSpeed / 10)), 0)
+                currentX = e.clientX * (1 + scrollSpeed / 10)
+            }
+        })
+    }, [])
+
     return (
         <div className="products-section">
             <div className="products-section__header">
                 <Title value={title} size={TitleSizes.medium} />
             </div>
-            <div className="products-section__cards">
+            <div ref={cardsRef} className="products-section__cards">
                 {
-                    products.map(product => (
-                        <ProductCart key={String(Date.now() * product.id)} title={product.title} author={product.author} avatar={product.avatar} preview={product.preview} price={product.price} />
+                    products.map((product, index) => (
+                        (numberOfDisplayedProducts != (index - 1)) ?
+                            <ProductCart key={String(Date.now() * product.id)} title={product.title} author={product.author} avatar={product.avatar} preview={product.preview} price={product.price} />: ''
                     ))
                 }
             </div>

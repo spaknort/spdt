@@ -7,15 +7,12 @@ import { Warrning } from "@/entities/warring"
 import { DropDown } from "@/entities/dropdown"
 import FavoriteButton from "@/shared/ui/favorites-button"
 import { FavoriteButtonTypes } from "@/shared/lib/enums/FavoriteButtonTypes"
+import NavigationPanel from "@/shared/config/UIConfig"
 
 export const Product: FC = () => {
     return (
         <div className="product">
-            <Aside items={[
-                { id: 1, svg: <SvgSelector svgName={svgNames.market} />, title: 'NFTs Marketplace' },
-                { id: 2, svg: <SvgSelector svgName={svgNames.profile} />, title: 'Profile' },
-                { id: 3, svg: <SvgSelector svgName={svgNames.signIn} />, title: 'Sign In' },
-            ]} />
+            <Aside items={NavigationPanel} />
             <div className="contents">
                 <Header title="NFT Marketplace" subTitle="Pages / NFT Marketplace" />
                 <main className="main main_product">

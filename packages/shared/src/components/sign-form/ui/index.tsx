@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, ButtonSizes, ButtonTypes, Colours, InputForm, InputFormTypes, Title, TitleSizes } from '@packages/shared'
 import { SignFormTypes } from '../../../lib/enum/signFormTypes'
+import { Link } from 'react-router-dom'
 import './index.sass'
 
 interface SignFormProps {
@@ -20,7 +21,7 @@ export const SignForm: React.FC<SignFormProps> = ({ type, items }) => {
         <div className="sign">
             <Title value={title} size={TitleSizes.big} />
             <p className="sign__sub-title">Enter your email and password to {title.toLocaleLowerCase()}!</p>
-            <div className='sign__form'>
+            <div style={{ height: (type == SignFormTypes.signIn) ? 'max-content': '70vh' }} className='sign__form'>
                 {items.map(item => (
                     <InputForm
                         key={String(Date.now() * Math.random() + item.lable)}
@@ -32,7 +33,11 @@ export const SignForm: React.FC<SignFormProps> = ({ type, items }) => {
                 ))}
                 <Button type={ButtonTypes.active} size={ButtonSizes.medium} styles={{ padding: '18px', borderRadius: '16px', marginTop: '12px', width: '98%' }} value={title} />
             </div>
-            <p className="sign__link">Not registered yet? <a style={{ color: Colours.text_color, cursor: 'pointer' }} href="/sign-up">Create an Account</a></p>
+            {
+                (type == SignFormTypes.signIn) ?
+                    <p className="sign__link">Not registered yet? <Link style={{ color: Colours.text_color, cursor: 'pointer' }} to="/sign-up">Create an Account</Link></p>:
+                    <p className="sign__link">Already registered? <Link style={{ color: Colours.text_color, cursor: 'pointer' }} to="/sign-in">Log In to your account</Link></p>
+            }
         </div>
     )
 }
