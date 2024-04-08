@@ -1,6 +1,6 @@
-import React, { FC } from "react"
+import React, { FC, useEffect } from "react"
 import './index.sass'
-import { Aside, Button, ButtonSizes, ButtonTypes, Colours, Header, Title, TitleSizes } from "@packages/shared"
+import { Aside, Button, ButtonSizes, ButtonTypes, Colours, getTitleForCurrentPage, Header, Title, TitleSizes } from "@packages/shared"
 import { SvgSelector } from "@/shared/ui/svgSelector"
 import { svgNames } from "@/shared/lib/enums/svgNames"
 import { Warrning } from "@/entities/warring"
@@ -10,11 +10,13 @@ import { FavoriteButtonTypes } from "@/shared/lib/enums/FavoriteButtonTypes"
 import NavigationPanel from "@/shared/config/UIConfig"
 
 export const Product: FC = () => {
+    const titleForCurrentPage = getTitleForCurrentPage()
+
     return (
         <div className="product">
             <Aside items={NavigationPanel} />
             <div className="contents">
-                <Header title="NFT Marketplace" subTitle="Pages / NFT Marketplace" />
+                <Header title={titleForCurrentPage} subTitle={`Pages / ${titleForCurrentPage}`} />
                 <main className="main main_product">
                     <div className="main__left">
                         <div style={{ backgroundColor: Colours.block_color }} className="product__img-block">

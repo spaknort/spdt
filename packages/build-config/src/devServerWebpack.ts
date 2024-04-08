@@ -3,7 +3,7 @@ import { BuildOptions } from './types/types'
 
 export const devServerWebpack = (options: BuildOptions): webpack.Configuration['devServer'] => {
     return {
-        port: options.port || 3000,
+        port: options.port || 4000,
         liveReload: true,
         historyApiFallback: true,
         hot: true

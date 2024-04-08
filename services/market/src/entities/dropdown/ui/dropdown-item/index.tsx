@@ -39,7 +39,7 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({ item }) => {
                 {
                     item.content.map(sub_item => {
                         return (
-                            <li className="dropdown__sub-item">
+                            <li key={sub_item.key} className="dropdown__sub-item">
                                 <span className="dropdown__sub-item__key">{ sub_item.key }</span>
                                 <span style={{ color: Colours.text_color }} className="dropdown__sub-item__value">{ sub_item.value }</span>
                             </li>

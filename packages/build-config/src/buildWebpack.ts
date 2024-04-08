@@ -4,7 +4,7 @@ import { pluginsWebpack } from './pluginsWebpack'
 import { resolveWebpack } from './resolveWebpack'
 import { rulesWebpack } from './rulesWebpack'
 import { devServerWebpack } from './devServerWebpack'
-import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
+import type { Configuration as DevServerConfiguration } from "webpack-dev-server"
 
 export const buildWebpack = (options: BuildOptions): webpack.Configuration => {
     const isDev = (options.mode == 'development') ? true: false

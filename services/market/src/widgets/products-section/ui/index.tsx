@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import './index.sass'
 import { Title, TitleSizes } from '@packages/shared'
+import { useNavigate } from 'react-router-dom'
 import { ProductCart } from '@/entities/product-cart'
 import { ProductsSectionTypes } from '@/shared/lib/enums/ProductsSectionTypes'
 
@@ -121,8 +122,8 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ title, numberO
         }
     ]
     const products = (type == ProductsSectionTypes.recently) ? recentlyProducts: trendingProducts
-
     const cardsRef = useRef<HTMLDivElement | null>(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (!cardsRef) return
@@ -153,7 +154,17 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ title, numberO
                 {
                     products.map((product, index) => (
                         (numberOfDisplayedProducts != (index - 1)) ?
-                            <ProductCart key={String(Date.now() * product.id)} title={product.title} author={product.author} avatar={product.avatar} preview={product.preview} price={product.price} />: ''
+                            <ProductCart
+                                key={String(Date.now() * product.id)}
+                                title={product.title}
+                                author={product.author}
+                                avatar={product.avatar}
+                                preview={product.preview}
+                                price={product.price}
+                                onClick={() => {
+                                    navigate('/product?id=' + product.id)
+                                }}
+                            />: ''
                     ))
                 }
             </div>

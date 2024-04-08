@@ -10,19 +10,20 @@ interface ProductCartProps {
     author: string,
     avatar: string,
     preview: string,
-    price: string
+    price: string,
+    onClick: () => void
 }
 
-export const ProductCart: React.FC<ProductCartProps> = ({ title, author, avatar, preview, price }) => {
+export const ProductCart: React.FC<ProductCartProps> = ({ title, author, avatar, preview, price, onClick }) => {
     return (
         <figure style={{ backgroundColor: Colours.block_color }} className="product-cart">
             <div style={{ backgroundColor: Colours.background_color }} className="product-cart__img-block">
-                <img src={ preview } alt="" draggable={false} className="product-cart__img" />
+                <img onClick={onClick} src={ preview } alt="" draggable={false} className="product-cart__img" />
                 <FavoriteButton className='favoriteButton'  type={FavoriteButtonTypes.productCart} />
             </div>
             <div className="product-cart__info">
                 <section className="product-cart__section">
-                    <Title value={ title } size={ TitleSizes.small } />
+                    <Title onClick={onClick} style={{ cursor: 'pointer' }} value={ title } size={ TitleSizes.small } />
                     <p className="product-cart__sub-title">By { author }</p>
                 </section>
                 <div style={{ backgroundColor: Colours.background_color }} className="product-cart__mini-avatar-block">
@@ -31,7 +32,7 @@ export const ProductCart: React.FC<ProductCartProps> = ({ title, author, avatar,
             </div>
             <div className="product-cart__price">
                 <p style={{ color: Colours.text_color }} className="product-cart__price-text">Current Bid: { price } RUB</p>
-                <Button value='Place Bid' type={ButtonTypes.active} size={ButtonSizes.small}  />
+                <Button onClick={onClick} value='Place Bid' type={ButtonTypes.active} size={ButtonSizes.small}  />
             </div>
         </figure>
     )

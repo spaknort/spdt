@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, ButtonSizes, ButtonTypes, Colours, InputForm, InputFormTypes, Title, TitleSizes } from '@packages/shared'
-import { SignFormTypes } from '../../../lib/enum/signFormTypes'
+import { SignFormTypes } from '../../../../lib/enum/signFormTypes'
 import { Link } from 'react-router-dom'
 import './index.sass'
 

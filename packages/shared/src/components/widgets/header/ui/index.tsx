@@ -1,6 +1,6 @@
 import React from 'react'
 import './index.sass'
-import { Colours, Title, TitleSizes } from '@packages/shared'
+import { Colours, SearchPanel, Title, TitleSizes } from '@packages/shared'
 
 interface HeaderProps {
     title: string,
@@ -14,9 +14,7 @@ export const Header: React.FC<HeaderProps> = ({ title, subTitle }) => {
                 <h4 style={{ color: Colours.text_color }} className="header__sub-title">{ subTitle }</h4>
                 <Title size={TitleSizes.big} value={title} />
             </section>
-            <div className="header__search-panel">
-
-            </div>
+            <SearchPanel />
         </header>
     )
 }

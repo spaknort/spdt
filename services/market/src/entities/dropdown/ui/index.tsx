@@ -13,7 +13,7 @@ interface DropDownProps {
 export const DropDown: React.FC<DropDownProps> = ({ items }) => {
     return (
         <ul className="dropdown">
-            { items.map(item => <DropDownItem item={item} />) }
+            { items.map(item => <DropDownItem key={item.value} item={item} />) }
         </ul>
     )
 }
