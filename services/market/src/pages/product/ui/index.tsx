@@ -17,6 +17,15 @@ export const Product: FC = () => {
     const priceThemeStyle = (theme == ThemeTypes.DARK) ? Colours.text_color: LightThemeColours.text_color
     const warningThemeStyle = (theme == ThemeTypes.DARK) ? Colours.block_color: LightThemeColours.block_color
 
+    const backgroundThemeStyle = (theme == ThemeTypes.DARK) ? Colours.background_color: LightThemeColours.background_color
+
+    useEffect(() => {
+        const rootElem = document.getElementById('root')
+        rootElem.style.cssText =  `
+            background-color: ${backgroundThemeStyle}
+        `
+    }, [backgroundThemeStyle])
+
     return (
         <div className="product">
             <Aside items={NavigationPanel} />

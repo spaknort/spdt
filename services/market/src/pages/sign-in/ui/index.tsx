@@ -13,7 +13,7 @@ export const SignIn: FC = () => {
         rootElem.style.cssText =  `
             background-color: ${backgroundThemeStyle}
         `
-    }, [])
+    }, [backgroundThemeStyle])
 
     return (
         <div className="sign-in">

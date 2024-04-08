@@ -2,9 +2,11 @@ export { Aside } from './components/widgets/aside'
 export { Header } from './components/widgets/header'
 export { Title } from './components/shared/title'
 export { Button } from './components/shared/button'
+export { Text } from './components/shared/text'
 export { SignForm } from './components/widgets/sign-form'
 export { InputForm } from './components/features/input-form'
 export { SearchPanel } from './components/widgets/search-panel'
+export { ProgressBar } from './components/entites/progress-bar'
 export { GeneralSvgSelector } from './components/generalSvgSelector'
 export const Colours = {
     background_color: '#0B1437',
@@ -15,7 +17,7 @@ export const Colours = {
 }
 export const LightThemeColours = {
     background_color: '#F4F7FE',
-    background_light_color: '#8F9BBA',
+    background_light_color: '#4f5b8b',
     text_color: '#2B3674',
     block_color: '#ffffff',
     active_color: '#7551FF'
@@ -27,6 +29,7 @@ export { ButtonTypes } from './lib/enum/buttonTypes'
 export { ButtonSizes } from './lib/enum/buttonSizes'
 export { InputFormTypes } from './lib/enum/inputFormTypes'
 export { generalSvgNames } from './lib/enum/generalSvgNames'
+export { ProgressBarTypes } from './lib/enum/progressBarTypes'
 export { userTypes } from './config/globalConfig'
 export { getTitleForCurrentPage } from './lib/helpers/getTitleForCurrentPage'
 export { useTypedSelector } from './lib/hooks/useTypedSelector'
