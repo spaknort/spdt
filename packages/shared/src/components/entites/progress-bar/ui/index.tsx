@@ -12,7 +12,7 @@ interface ProgressBarProps {
     to: number,
 }
 
-export const ProgressBar: React.FC<ProgressBarProps> = ({ type, from, value, to }) => {
+export const ProgressBar: React.FC<ProgressBarProps> = ({ type, from = 0, value, to }) => {
     const theme = useTypedSelector(state => state.themeReducer.theme)
     const valueThemeStyle = (theme == ThemeTypes.DARK) ? Colours.text_color: LightThemeColours.text_color
     const fillLineThemeStyle  = (theme == ThemeTypes.DARK) ? Colours.active_color: LightThemeColours.active_color
