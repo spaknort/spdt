@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react"
 import './index.sass'
-import { Aside, Button, ButtonSizes, ButtonTypes, Colours, getTitleForCurrentPage, Header, Title, TitleSizes } from "@packages/shared"
+import { Aside, Button, ButtonSizes, ButtonTypes, Colours, getTitleForCurrentPage, Header, LightThemeColours, Title, TitleSizes, useTypedSelector } from "@packages/shared"
 import { SvgSelector } from "@/shared/ui/svgSelector"
 import { svgNames } from "@/shared/lib/enums/svgNames"
 import { Warrning } from "@/entities/warring"
@@ -8,16 +8,21 @@ import { DropDown } from "@/entities/dropdown"
 import FavoriteButton from "@/shared/ui/favorites-button"
 import { FavoriteButtonTypes } from "@/shared/lib/enums/FavoriteButtonTypes"
 import NavigationPanel from "@/shared/config/UIConfig"
+import { ThemeTypes } from "@packages/shared/src/lib/enum/themeTypes"
 
 export const Product: FC = () => {
     const titleForCurrentPage = getTitleForCurrentPage()
+    const theme = useTypedSelector(state => state.themeReducer.theme)
+    const mainThemeStyle = (theme == ThemeTypes.DARK) ? Colours.background_color: LightThemeColours.background_color
+    const priceThemeStyle = (theme == ThemeTypes.DARK) ? Colours.text_color: LightThemeColours.text_color
+    const warningThemeStyle = (theme == ThemeTypes.DARK) ? Colours.block_color: LightThemeColours.block_color
 
     return (
         <div className="product">
             <Aside items={NavigationPanel} />
             <div className="contents">
                 <Header title={titleForCurrentPage} subTitle={`Pages / ${titleForCurrentPage}`} />
-                <main className="main main_product">
+                <main style={{ background: mainThemeStyle }} className="main main_product">
                     <div className="main__left">
                         <div style={{ backgroundColor: Colours.block_color }} className="product__img-block">
                             <img className="product__img" src="https://lh3.google.com/u/0/d/1OaO6s-reYvsNs-xkZsZ5-Oye2KSHmE7p" alt="" />
@@ -55,7 +60,7 @@ export const Product: FC = () => {
                             <div className="prdouct__additional">
                                 <div className="product_favorites">
                                     <FavoriteButton type={FavoriteButtonTypes.product} />
-                                    <span className="product__favorites-count" style={{ color: Colours.text_color }}>4</span>
+                                    <span className="product__favorites-count" style={{ color: priceThemeStyle }}>4</span>
                                 </div>
                                 <SvgSelector svgName={svgNames.shared} params={{ width: 18, height: 18, fill: '#848E9C', stroke: '#848E9C' }} />
                                 <SvgSelector svgName={svgNames.productMenu} params={{ width: 22, height: 22, fill: '#848E9C', stroke: '#848E9C' }} />
@@ -63,7 +68,7 @@ export const Product: FC = () => {
                         </div>
                         <div className="product__price-block">
                             <h6 className="product__price-title">Price</h6>
-                            <h4 style={{ color: Colours.text_color }} className="product__price">
+                            <h4 style={{ color: priceThemeStyle }} className="product__price">
                                 0.91 RUB 
                                 <span className="product__price__span">≈ 12 USD</span>
                             </h4>
@@ -75,7 +80,7 @@ export const Product: FC = () => {
                         </div>
                         <Warrning
                             text="Напоминание о риске: в настоящее время вы просматриваете неверифицированную коллекцию. Эти NFT не были верифицированы Binance. Вам необходимо самостоятельно изучить информацию о создателе, легитимности или подлинности. Совершайте покупку только в том случае, если вы согласны со связанными рисками."
-                            background={Colours.block_color}
+                            background={ warningThemeStyle }
                         />
                     </div>
                 </main>

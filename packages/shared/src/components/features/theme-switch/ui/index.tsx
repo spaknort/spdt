@@ -17,13 +17,13 @@ export const ThemeSwitch: React.FC = () => {
                 (theme == ThemeTypes.DARK) ?
                     <GeneralSvgSelector 
                         styles={{ cursor: 'pointer' }} 
-                        params={{ width: 18, height: 18, fill: Colours.text_color }} 
+                        params={{ width: 18, height: 18 }} 
                         onClick={() => dispatch({ type: ThemeActionTypes.CHANGE_THEME, theme: ThemeTypes.LIGHT })}
                         svgName={ generalSvgNames.darkTheme }
                     />:
                     <GeneralSvgSelector 
                         styles={{ cursor: 'pointer' }} 
-                        params={{ width: 26, height: 26, stroke: Colours.text_color, fill: Colours.text_color }} 
+                        params={{ width: 26, height: 26 }} 
                         onClick={() => dispatch({ type: ThemeActionTypes.CHANGE_THEME, theme: ThemeTypes.DARK })}
                         svgName={ generalSvgNames.lightTheme }
 

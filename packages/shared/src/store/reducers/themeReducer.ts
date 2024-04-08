@@ -13,6 +13,7 @@ const themeStateDefault: IThemeStateDefault = {
 export const themeReducer = (state = themeStateDefault, action: ThemeAction) => {
     switch (action.type) {
         case ThemeActionTypes.CHANGE_THEME:
+            localStorage.setItem('theme', action.theme)
             return { ...state, theme: action.theme }
         default: return { ...state }
     }

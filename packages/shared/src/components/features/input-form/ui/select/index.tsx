@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import './index.sass'
-import { Colours } from '@packages/shared'
+import { Colours, LightThemeColours, useTypedSelector } from '@packages/shared'
+import { ThemeTypes } from '../../../../../lib/enum/themeTypes'
 
 interface SelectorProps {
     items: Array<string>
@@ -11,6 +12,11 @@ export const Selector: React.FC<SelectorProps> = ({ items }) => {
         customSelectRef = useRef<HTMLDivElement | null>(null),
         selectBtnRef = useRef<HTMLButtonElement | null>(null),
         selectedValueRef = useRef<HTMLSpanElement | null>(null)
+
+    const theme = useTypedSelector(state => state.themeReducer.theme)
+    const dropDownThemeStyle = (theme == ThemeTypes.DARK) ? Colours.background_color: LightThemeColours.background_color
+    const dropDownBorderThemeStyle = (theme == ThemeTypes.DARK) ? Colours.block_color: LightThemeColours.block_color
+    const labelThemeStyle = (theme == ThemeTypes.DARK) ? Colours.text_color: LightThemeColours.text_color
 
     function selectButtonFunc () {
         if (customSelectRef.current == null) return
@@ -41,16 +47,16 @@ export const Selector: React.FC<SelectorProps> = ({ items }) => {
         
     return (
         <div className='input-form__container'>
-            <div ref={customSelectRef} className="custom-select">
-                <button ref={selectBtnRef} onClick={() => selectButtonFunc()} className="select-button">
+            <div ref={customSelectRef} className={"custom-select"}>
+                <button ref={selectBtnRef} onClick={() => selectButtonFunc()} className={"select-button select-button_" + theme.toLowerCase()}>
                     <span ref={selectedValueRef} className="selected-value">Open this select menu</span>
                     <span className="arrow"></span>
                 </button>
-                <ul style={{ backgroundColor: Colours.background_color, border: 'solid 1px ' + Colours.block_color }} className="select-dropdown">
+                <ul style={{ backgroundColor: dropDownThemeStyle, border: 'solid 1px ' + dropDownBorderThemeStyle }} className="select-dropdown">
                     {items.map(value => (
                         <li key={String((Date.now() * Math.random())) + value}>
-                            <input type="radio" id={ value } name="social-account" />
-                            <label style={{ color: Colours.text_color }} htmlFor={ value }>{ value }</label>
+                            <input className={"select-dropdown__input_" + theme.toLowerCase()} type="radio" id={ value } name="social-account" />
+                            <label style={{ color: labelThemeStyle }} htmlFor={ value }>{ value }</label>
                         </li>
                     ))}
                 </ul>

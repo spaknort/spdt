@@ -13,9 +13,14 @@
     font-size: 1rem
     background-color: transparent
     padding: 18px 24px
-    border: 1px solid rgba(255, 255, 255, .2)
     border-radius: 16px
     cursor: pointer
+
+.select-button_dark
+    border: 1px solid rgba(255, 255, 255, .2)
+
+.select-button_light
+    border: 1px solid #E0E5F2
 
 .selected-value 
     text-align: left
@@ -48,11 +53,18 @@
     cursor: pointer
 
 .select-dropdown li:hover,
-.select-dropdown input:checked ~ label 
+.select-dropdown_input_dark:checked ~ label 
     background-color: #111C44
 
-.select-dropdown input:focus ~ label 
+.select-dropdown_input_dark:focus ~ label 
     background-color: #111C44
+
+.select-dropdown li:hover,
+.select-dropdown_input_light:checked ~ label 
+    background-color: #dae1f1
+
+.select-dropdown_input_light:focus ~ label 
+    background-color: #dae1f1
 
 .select-dropdown input[type="radio"]
     position: absolute

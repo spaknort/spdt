@@ -13,6 +13,13 @@ export const Colours = {
     text_color: '#fafafa',
     active_color: '#7551FF'
 }
+export const LightThemeColours = {
+    background_color: '#F4F7FE',
+    background_light_color: '#8F9BBA',
+    text_color: '#2B3674',
+    block_color: '#ffffff',
+    active_color: '#7551FF'
+}
 export * as Style from './styles/style.sass'
 export * as Reset from './styles/reset.sass'
 export { TitleSizes } from './lib/enum/titleSizes'

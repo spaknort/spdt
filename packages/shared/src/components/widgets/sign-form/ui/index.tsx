@@ -1,8 +1,9 @@
 import React from 'react'
-import { Button, ButtonSizes, ButtonTypes, Colours, InputForm, InputFormTypes, Title, TitleSizes } from '@packages/shared'
+import { Button, ButtonSizes, ButtonTypes, Colours, InputForm, InputFormTypes, LightThemeColours, Title, TitleSizes, useTypedSelector } from '@packages/shared'
 import { SignFormTypes } from '../../../../lib/enum/signFormTypes'
 import { Link } from 'react-router-dom'
 import './index.sass'
+import { ThemeTypes } from '../../../../lib/enum/themeTypes'
 
 interface SignFormProps {
     type: SignFormTypes,
@@ -15,7 +16,9 @@ interface SignFormProps {
 }
 
 export const SignForm: React.FC<SignFormProps> = ({ type, items }) => {
+    const theme = useTypedSelector(state => state.themeReducer.theme)
     const title = (type == SignFormTypes.signIn) ? 'Sign In': 'Sign Up'
+    const textThemeStyle = (theme == ThemeTypes.DARK) ? Colours.text_color: LightThemeColours.text_color
 
     return (
         <div className="sign">
@@ -35,8 +38,8 @@ export const SignForm: React.FC<SignFormProps> = ({ type, items }) => {
             </div>
             {
                 (type == SignFormTypes.signIn) ?
-                    <p className="sign__link">Not registered yet? <Link style={{ color: Colours.text_color, cursor: 'pointer' }} to="/sign-up">Create an Account</Link></p>:
-                    <p className="sign__link">Already registered? <Link style={{ color: Colours.text_color, cursor: 'pointer' }} to="/sign-in">Log In to your account</Link></p>
+                    <p className="sign__link">Not registered yet? <Link style={{ color: textThemeStyle, cursor: 'pointer' }} to="/sign-up">Create an Account</Link></p>:
+                    <p className="sign__link">Already registered? <Link style={{ color: textThemeStyle, cursor: 'pointer' }} to="/sign-in">Log In to your account</Link></p>
             }
         </div>
     )

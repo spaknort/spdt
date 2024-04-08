@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { NavigationItem } from './navigation-item'
-import { INavigationItem } from '@/shared/lib/interfaces/INavigationItem'
+import { INavigationItem } from '../../../../../lib/interfaces/INavigationItem'
+
 import './index.sass'
 
 interface NavigationProps {

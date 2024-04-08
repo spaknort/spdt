@@ -1,9 +1,10 @@
 import React, { useState, useEffect, FocusEvent, ChangeEvent } from 'react'
-import { InputFormTypes, generalSvgNames, userTypes } from '@packages/shared'
+import { InputFormTypes, LightThemeColours, generalSvgNames, useTypedSelector, userTypes } from '@packages/shared'
 import { Colours } from '@packages/shared'
 import { GeneralSvgSelector } from '@packages/shared'
 import { Selector } from './select'
 import './index.sass'
+import { ThemeTypes } from '../../../../lib/enum/themeTypes'
 
 interface InputFormProps {
     type: InputFormTypes
@@ -13,6 +14,9 @@ interface InputFormProps {
 }
 
 export const InputForm: React.FC<InputFormProps> = ({ type, lable, placeholder, required }) => {
+    const theme = useTypedSelector(state => state.themeReducer.theme)
+    const inputThemeStyle = (theme == ThemeTypes.DARK) ? Colours.text_color: LightThemeColours.text_color
+    const labelThemeStyle = (theme == ThemeTypes.DARK) ? Colours.active_color: LightThemeColours.active_color
     const [showPasswordState, setShowPasswordState] = useState<boolean>(false)
     const 
         [email, setEmail] = useState<string>(),
@@ -47,26 +51,26 @@ export const InputForm: React.FC<InputFormProps> = ({ type, lable, placeholder, 
 
     return (
         <div className="input-form">
-            <label style={{ color: Colours.text_color }} className='input-form__label'>
+            <label style={{ color: inputThemeStyle }} className='input-form__label'>
                 { lable }
-                { (required) ? <span style={{ color: Colours.active_color }}> *</span>: '' }
-                { (emailDirty && emailError) ? <span style={{ color: Colours.active_color }}>{ emailError }</span>: '' }
-                { (passwordDirty && passwordError) ? <span style={{ color: Colours.active_color }}>{ passwordError }</span>: '' }
+                { (required) ? <span style={{ color: labelThemeStyle }}> *</span>: '' }
+                { (emailDirty && emailError) ? <span style={{ color: labelThemeStyle }}>{ emailError }</span>: '' }
+                { (passwordDirty && passwordError) ? <span style={{ color: labelThemeStyle }}>{ passwordError }</span>: '' }
             </label>
             {
                 (type == InputFormTypes.email) ?
-                    <input onChange={ emailHandler } onBlur={ blurHandler } style={{ color: Colours.text_color }} value={email} type={type} placeholder={placeholder} className="input-form__input" />:
+                    <input onChange={ emailHandler } onBlur={ blurHandler } style={{ color: inputThemeStyle }} value={email} type={type} placeholder={placeholder} className={"input-form__input input-form__input_" + theme.toLowerCase()} />:
                 (type == InputFormTypes.text) ?
-                    <input style={{ color: Colours.text_color }} type={type} placeholder={placeholder} className="input-form__input" />:
+                    <input style={{ color: inputThemeStyle }} type={type} placeholder={placeholder} className={"input-form__input input-form__input_" + theme.toLowerCase()} />:
                 (type == InputFormTypes.password) ? 
                     <div className='input-form__container'>
-                        <input onChange={ passwordHandler } onBlur={ blurHandler } style={{ color: Colours.text_color }} value={password} type={(!showPasswordState) ? 'password': 'text'} placeholder={placeholder} className="input-form__input" />
+                        <input onChange={ passwordHandler } onBlur={ blurHandler } style={{ color: inputThemeStyle }} value={password} type={(!showPasswordState) ? 'password': 'text'} placeholder={placeholder} className={"input-form__input input-form__input_" + theme.toLowerCase()} />
                         <GeneralSvgSelector styles={{ cursor: 'pointer' }} onClick={() => setShowPasswordState(!showPasswordState)} className='input-form__eye' svgName={(!showPasswordState) ? generalSvgNames.eye: generalSvgNames.crossedEye} params={{ width: 22, height: 20, fill: '#A3AED0', stroke: '#A3AED0' }} />
                     </div>:
                 (type == InputFormTypes.selector) ?
                     <Selector items={ userTypes }/>:
                 (type == InputFormTypes.tel) ?
-                    <input style={{ color: Colours.text_color }} type={type} placeholder={placeholder} pattern="^[+]?[0-9]{9,12}$" className="input-form__input" />:
+                    <input style={{ color: inputThemeStyle }} type={type} placeholder={placeholder} pattern="^[+]?[0-9]{9,12}$" className={"input-form__input input-form__input_" + theme.toLowerCase()} />:
                 ''
             }
         </div>
