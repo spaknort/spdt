@@ -13,7 +13,7 @@ export const SignUp: React.FC = () => {
         rootElem.style.cssText =  `
             background-color: ${backgroundThemeStyle}
         `
-    }, [])
+    }, [backgroundThemeStyle])
 
     return (
         <div className="sign-up">
