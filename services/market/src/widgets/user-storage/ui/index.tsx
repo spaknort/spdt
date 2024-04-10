@@ -13,9 +13,9 @@ export const UserStorage: React.FC = () => {
             <div className="user-storage__content">
                 <img className='user-storage__img' src="https://lh3.google.com/u/0/d/1uiQ_J2t7q14loI1ob9jTLUGsndTyvACS" alt="User Storage Img" />
                 <Title value='Your storage' size={TitleSizes.medium} />
-                <Text style={{ textAlign: 'center' }} value='Supervise your drive space in the easiest way' size={1} />
-                <ProgressBar type={ProgressBarTypes.GB} from={0} value={25.2} to={50} />
+                <Text style={{ textAlign: 'center', width: '70%' }} value='Supervise your drive space in the easiest way' size={1} />
             </div>
+            <ProgressBar type={ProgressBarTypes.GB} from={0} value={25.2} to={50} />
         </div>
     )
 }

@@ -5,7 +5,7 @@ import { Colours, useTypedSelector } from '../../../..'
 import { ThemeTypes } from '../../../../lib/enum/themeTypes'
 import './index.sass'
 import { useDispatch } from 'react-redux'
-import { ThemeActionTypes } from '../../../../lib/enum/themeActionTypes'
+import { ThemeActionTypes } from '../../../../lib/enum/actions/themeActionTypes'
 
 export const ThemeSwitch: React.FC = () => {
     const theme = useTypedSelector(state => state.themeReducer.theme)
