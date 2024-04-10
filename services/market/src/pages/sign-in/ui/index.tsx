@@ -10,8 +10,9 @@ export const SignIn: FC = () => {
 
     useEffect(() => {
         const rootElem = document.getElementById('root')
-        rootElem.style.cssText =  `background-color: ${backgroundThemeStyle}`
-        document.body.classList.add((theme == ThemeTypes.DARK) ? 'body_dark': 'body_light')
+        rootElem.style.cssText =  `
+            zbackground-color: ${backgroundThemeStyle}
+        `
     }, [])
 
     return (

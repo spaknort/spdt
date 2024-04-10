@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react"
+import React, { FC } from "react"
 import './index.sass'
 import { Aside, Colours, getTitleForCurrentPage, Header, LightThemeColours, useTypedSelector } from "@packages/shared"
 import { ProductsSection } from "@/widgets/products-section"
@@ -10,13 +10,6 @@ export const Products: FC = () => {
     const titleForCurrentPage = getTitleForCurrentPage()
     const theme = useTypedSelector(state => state.themeReducer.theme)
     const mainThemeStyle = (theme == ThemeTypes.DARK) ? Colours.background_color: LightThemeColours.background_color
-    const backgroundThemeStyle = (theme == ThemeTypes.DARK) ? Colours.background_color: LightThemeColours.background_color
-
-    useEffect(() => {
-        const rootElem = document.getElementById('root')
-        rootElem.style.cssText =  `background-color: ${backgroundThemeStyle}`
-        document.body.classList.add((theme == ThemeTypes.DARK) ? 'body_dark': 'body_light')
-    }, [])
 
     return (
         <div className="products">
