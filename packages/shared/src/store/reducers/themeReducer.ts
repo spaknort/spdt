@@ -1,4 +1,4 @@
-import { ThemeActionTypes } from '../../lib/enum/themeActionTypes'
+import { ThemeActionTypes } from '../../lib/enum/actions/themeActionTypes'
 import { ThemeTypes } from '../../lib/enum/themeTypes'
 import { ThemeAction } from '../../lib/interfaces/actions/themeAction'
 

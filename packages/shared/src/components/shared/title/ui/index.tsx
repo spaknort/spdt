@@ -8,6 +8,7 @@ interface TitleProps {
     size: TitleSizes,
     value: string,
     style?: CSSProperties,
+    className?: string,
     onClick?: () => void
 }
 

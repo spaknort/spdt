@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react"
 import './index.sass'
-import { Aside, Button, ButtonSizes, ButtonTypes, Colours, getTitleForCurrentPage, Header, LightThemeColours, Title, TitleSizes, useTypedSelector } from "@packages/shared"
+import { Aside, Button, ButtonSizes, ButtonTypes, Colours, getTitleForCurrentPage, Header, helperForTheme, LightThemeColours, Title, TitleSizes, useTypedSelector } from "@packages/shared"
 import { SvgSelector } from "@/shared/ui/svgSelector"
 import { svgNames } from "@/shared/lib/enums/svgNames"
 import { Warrning } from "@/entities/warring"
@@ -19,12 +19,7 @@ export const Product: FC = () => {
 
     const backgroundThemeStyle = (theme == ThemeTypes.DARK) ? Colours.background_color: LightThemeColours.background_color
 
-    useEffect(() => {
-        const rootElem = document.getElementById('root')
-        rootElem.style.cssText =  `
-            background-color: ${backgroundThemeStyle}
-        `
-    }, [backgroundThemeStyle])
+    useEffect(() => helperForTheme(theme, backgroundThemeStyle), [backgroundThemeStyle])
 
     return (
         <div className="product">

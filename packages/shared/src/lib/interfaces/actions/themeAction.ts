@@ -1,5 +1,5 @@
 import { ThemeTypes } from "../../enum/themeTypes"
-import { ThemeActionTypes } from '../../enum/themeActionTypes'
+import { ThemeActionTypes } from '../../../index'
 
 export interface ThemeAction {
     type: ThemeActionTypes,

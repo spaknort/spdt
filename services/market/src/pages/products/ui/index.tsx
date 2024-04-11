@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react"
 import './index.sass'
-import { Aside, Colours, getTitleForCurrentPage, Header, LightThemeColours, useTypedSelector } from "@packages/shared"
+import { Aside, Colours, getTitleForCurrentPage, Header, helperForTheme, LightThemeColours, useTypedSelector } from "@packages/shared"
 import { ProductsSection } from "@/widgets/products-section"
 import { ProductsSectionTypes } from "@/shared/lib/enums/ProductsSectionTypes"
 import NavigationPanel from "@/shared/config/UIConfig"
@@ -12,13 +12,8 @@ export const Products: FC = () => {
     const mainThemeStyle = (theme == ThemeTypes.DARK) ? Colours.background_color: LightThemeColours.background_color
     const backgroundThemeStyle = (theme == ThemeTypes.DARK) ? Colours.background_color: LightThemeColours.background_color
 
-    useEffect(() => {
-        const rootElem = document.getElementById('root')
-        rootElem.style.cssText =  `
-            background-color: ${backgroundThemeStyle}
-        `
-    }, [backgroundThemeStyle])
-
+    useEffect(() => helperForTheme(theme, backgroundThemeStyle), [backgroundThemeStyle])
+    
     return (
         <div className="products">
             <Aside items={NavigationPanel} />
