@@ -1,6 +1,5 @@
 import React from 'react'
 import './index.sass'
-import { useSelector } from 'react-redux'
 import { Colours, LightThemeColours, Title, TitleSizes, useTypedSelector } from '@packages/shared'
 import { ThemeTypes } from '@packages/shared/src/lib/enum/themeTypes'
 import { Avatar } from '@packages/shared/src/components/entites/avatar/ui'
