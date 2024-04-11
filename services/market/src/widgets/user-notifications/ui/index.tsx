@@ -4,7 +4,6 @@ import React from "react"
 import './index.sass'
 import { NotificationItem } from "../components/notification-item"
 
-
 export const UserNotifications: React.FC = () => {
     const theme = useTypedSelector(state => state.themeReducer.theme)
     const notifications = useTypedSelector(state => state.notificationReducer.items)

@@ -1,6 +1,6 @@
 import { NotificationItemTypes } from '../../index'
 
 export interface INotificationItem {
-    type: NotificationItemTypes,
+    type: boolean,
     title: string
 }

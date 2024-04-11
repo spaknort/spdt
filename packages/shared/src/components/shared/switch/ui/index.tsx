@@ -3,7 +3,7 @@ import './index.sass'
 
 interface SwitchProps {
     state: boolean,
-    onClick: () => void
+    onClick?: () => void
 }
 
 export const Switch: React.FC<SwitchProps> = ({ state, onClick }) => {

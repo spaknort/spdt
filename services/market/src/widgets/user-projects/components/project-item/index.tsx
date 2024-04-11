@@ -13,7 +13,7 @@ export const ProjectItem: React.FC<IProjectItem> = ({ id, title, imgPath }) => {
         <div style={{ background: ProjectItemThemeStyle }} className="project-item">
             <img src={imgPath} alt="" className="project-item__img" />
             <div className="project-item__content">
-                <Title style={{ width: 'max-content' }} value={title} size={TitleSizes.small} />
+                <Title className="project-item__title" style={{ width: 'max-content' }} value={title} size={TitleSizes.small} />
                 <div>
                     <span className="project-item__id">Project # {id}</span>
                     <Link className="project-item__details" to="">See project details</Link>

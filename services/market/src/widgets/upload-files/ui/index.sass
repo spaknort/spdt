@@ -1,6 +1,7 @@
 .upload-files
     display: flex
     align-items: center
+    justify-content: center
     gap: 30px
     border-radius: 20px
     padding: 20px
@@ -35,3 +36,11 @@
 .upload-files__text
     width: max-content
     margin-top: 6px
+
+@media screen and ( max-width: 1441px )
+    .upload-files
+        width: 100%
+
+@media screen and ( max-width: 426px )
+    .upload-files
+        flex-direction: column

@@ -8,5 +8,19 @@
     gap: 20px
 
 .main-profile__flex-container
+    width: 100%
     display: flex
+    justify-content: center
     gap: 20px
+
+@media screen and ( max-width: 1441px )
+    .main-profile__flex-container
+        flex-wrap: wrap
+
+    .main-profile
+        width: 90%
+        margin: 0 auto
+
+@media screen and ( max-width: 426px )
+    .main-profile
+        width: 100%
