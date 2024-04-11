@@ -1,0 +1,28 @@
+.project-item
+    display: flex
+    align-items: center
+    column-gap: 20px
+    padding: 20px
+    border-radius: 20px
+
+.project-item__id,
+.project-item__details
+    color: #A3AED0
+    font-size: 0.875rem
+    position: relative
+
+.project-item__details
+    text-decoration: underline
+    margin-left: 14px
+
+.project-item__id::before
+    content: ''
+    display: block
+    position: absolute
+    right: -9px
+    top: 50%
+    transform: translateY(-50%)
+    width: 4px
+    height: 4px
+    background-color: #A3AED0
+    border-radius: 50%

@@ -11,6 +11,7 @@ export const UploadFiles: React.FC = () => {
     const uploadFiles = useTypedSelector(state => state.uploadFileReducer.data)
     const theme = useTypedSelector(state => state.themeReducer.theme)
     const uploadFilesThemeStyle = (theme == ThemeTypes.DARK) ? Colours.block_color: LightThemeColours.block_color
+    const uploadFilesLeftThemeStyle = (theme == ThemeTypes.DARK) ? Colours.background_color: LightThemeColours.background_color
     const [isFileUpload, setIsFileUpload] = useState<boolean>(false)
 
     useEffect(() => { dispatch({type: UploadFileActionTypes.ADD_UPLOAD_FILE, data: []}) }, [])
@@ -18,7 +19,7 @@ export const UploadFiles: React.FC = () => {
 
     return (
         <div style={{ background: uploadFilesThemeStyle }} className="upload-files">
-            <div className="upload-files__left">
+            <div style={{ background: uploadFilesLeftThemeStyle }} className="upload-files__left">
                 {
                     (!isFileUpload) ? 
                         <div className="upload-files__upload">
