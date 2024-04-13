@@ -1,0 +1,18 @@
+export interface IFullUser {
+    id: number,
+    name: string,
+    surname: string,
+    email: string,
+    number_phone: string,
+    speciality: string,
+    is_activated: boolean,
+    avatar?: string,
+    date_of_birth?: string,
+    education?: string,
+    favorite_products?: string,
+    favorite_users?: string,
+    languages?: string,
+    organization?: string,
+    text?: string,
+    work_history?: string,
+}

@@ -100,6 +100,36 @@ class UserService {
         // @ts-ignore
         return result[0]
     }
+
+    async getUserById(id: number) {
+        const [result, fields] = await connection.query(`SELECT avatar, date_of_birth, education, email, favorite_products, favorite_users, id, is_activated, languages, name, number_phone, organization, speciality, surname, text, work_history FROM users WHERE id='${id}'`)
+        // @ts-ignore
+        return result[0]
+    }
+
+    async editEducation(id: number, value: string) {
+        await connection.query(`UPDATE users SET education='${value}' WHERE id='${id}'`)
+    }
+
+    async editOrganization(id: number, value: string) {
+        await connection.query(`UPDATE users SET organization='${value}' WHERE id='${id}'`)
+    }
+
+    async editWorkHistory(id: number, value: string) {
+        await connection.query(`UPDATE users SET work_history='${value}' WHERE id='${id}'`)
+    }
+
+    async editSpeciality(id: number, value: string) {
+        await connection.query(`UPDATE users SET speciality='${value}' WHERE id='${id}'`)
+    }
+
+    async editLanguages(id: number, value: string) {
+        await connection.query(`UPDATE users SET languages='${value}' WHERE id='${id}'`)
+    }
+
+    async editDateOfBirth(id: number, value: string) {
+        await connection.query(`UPDATE users SET date_of_birth='${value}' WHERE id='${id}'`)
+    }
 }
 
 export const userService = new UserService()

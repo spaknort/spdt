@@ -9,6 +9,7 @@ import { Counter } from '../components/counter'
 export const UserCard: React.FC = () => {
     const theme = useTypedSelector(state => state.themeReducer.theme)
     const userCardThemeStyle = (theme == ThemeTypes.DARK) ? Colours.block_color: LightThemeColours.block_color
+    const userFullData = useTypedSelector(state => state.userReducer.userFullInfo)
 
     return (
         <div style={{ background: userCardThemeStyle }} className="user-card">
@@ -17,8 +18,8 @@ export const UserCard: React.FC = () => {
                 <Avatar className='user-card__avatar' />
             </div>
             <div className="user-card__content">
-                <Title value='Adela Parkson' size={TitleSizes.medium} />
-                <Text value='Product Designer' size={1} />
+                <Title value={`${userFullData.name} ${userFullData.surname}`} size={TitleSizes.medium} />
+                <Text value={userFullData.speciality} size={1} />
                 <div className="user-card__counters">
                     <Counter value={10} text='Posts' />
                     <Counter value={9700} text='Followers' />

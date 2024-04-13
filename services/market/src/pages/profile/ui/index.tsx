@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react"
 import './index.sass'
-import { Aside, Colours, Header, LightThemeColours, getTitleForCurrentPage, helperForTheme, useTypedSelector } from "@packages/shared"
+import { Aside, Colours, Header, IFullUser, LightThemeColours, UserActionTypes, checkAuth, getTitleForCurrentPage, helperForTheme, useTypedSelector } from "@packages/shared"
 import { ThemeTypes } from "@packages/shared/src/lib/enum/themeTypes"
 import NavigationPanel from "@/shared/config/UIConfig"
 import { UserCard } from "@/widgets/user-card"
@@ -9,13 +9,28 @@ import { UploadFiles } from "@/widgets/upload-files"
 import { UserInfo } from "@/widgets/user-info"
 import { UserProjects } from "@/widgets/user-projects"
 import { UserNotifications } from "@/widgets/user-notifications"
+import { useDispatch } from "react-redux"
+import { getUserById } from "../api/getUserById"
 
 export const Profile: FC = () => {
+    const dispatch = useDispatch()
+    const isAuth = useTypedSelector(state => state.userReducer.isAuth)
+    const userInfo = useTypedSelector(state => state.userReducer.userInfo)
     const theme = useTypedSelector(state => state.themeReducer.theme)
     const backgroundThemeStyle = (theme == ThemeTypes.DARK) ? Colours.background_color: LightThemeColours.background_color
     const titleForCurrentPage = getTitleForCurrentPage()
 
     useEffect(() => helperForTheme(theme, backgroundThemeStyle), [backgroundThemeStyle])
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            checkAuth(dispatch)
+        }
+        getUserById(userInfo.id).then((result: IFullUser) => {
+            console.log(result)
+            dispatch({ type: UserActionTypes.SET_USER_FULL_INFO, userFullInfo: result })
+        })
+    }, [])
 
     return (
         <div className="profile">

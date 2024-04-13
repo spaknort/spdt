@@ -4,5 +4,6 @@ export enum generalSvgNames {
     searchInput = 'search-input',
     darkTheme = 'dark-theme',
     lightTheme = 'light-theme',
-    notification = 'notification'
+    notification = 'notification',
+    edit = 'edit'
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { svgNames } from "../lib/enums/svgNames";
 import { INavigationItem } from "../lib/interfaces/INavigationItem";
 import { SvgSelector } from "../ui/svgSelector";
+import { useTypedSelector } from "@packages/shared";
 
 const NavigationPanel: Array<INavigationItem> = [
     {
@@ -15,12 +16,6 @@ const NavigationPanel: Array<INavigationItem> = [
         svg: <SvgSelector svgName={svgNames.profile} />,
         title: 'Profile',
         path: '/profile'
-    },
-    {
-        id: 3,
-        svg: <SvgSelector svgName={svgNames.signIn} />,
-        title: 'Sign In',
-        path: '/sign-in'
     }
 ]
 

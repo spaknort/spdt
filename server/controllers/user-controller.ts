@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import { userService } from "../services/user-service"
 import { compareSync } from "bcrypt"
+import { tokenService } from "../services/token-service"
 
 class UserController {
     async registration(req: Request, res: Response, next: NextFunction) {
@@ -83,6 +84,102 @@ class UserController {
             res.json(users)
         } catch (e) {
             console.log(e)
+        }
+    }
+
+    async getUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { refreshToken } = req.cookies
+            const result = await tokenService.checkUserByRefreshToken(Number(req.params.id), refreshToken)
+
+            if (result) res.json(await userService.getUserById(Number(req.params.id)))
+            else throw new Error('Пользователь и отпрвленный токен не совпадают')
+        } catch (e: any) {
+            res.json(e.message)
+        }
+    }
+
+    async editEducation(req: Request, res: Response, next: NextFunction) {
+        try {
+            const value = req.params.value
+            const userId = req.body.userId
+
+            await userService.editEducation(userId, value)
+            res.sendStatus(200)
+
+        } catch (e) {
+            // @ts-ignore
+            res.json(e.message)
+        }
+    }
+
+    async editOrganization(req: Request, res: Response, next: NextFunction) {
+        try {
+            const value = req.params.value
+            const userId = req.body.userId
+
+            await userService.editOrganization(userId, value)
+            res.sendStatus(200)
+
+        } catch (e) {
+            // @ts-ignore
+            res.json(e.message)
+        }
+    }
+
+    async editWorkHistory(req: Request, res: Response, next: NextFunction) {
+        try {
+            const value = req.params.value
+            const userId = req.body.userId
+
+            await userService.editWorkHistory(userId, value)
+            res.sendStatus(200)
+
+        } catch (e) {
+            // @ts-ignore
+            res.json(e.message)
+        }
+    }
+
+    async editSpeciality(req: Request, res: Response, next: NextFunction) {
+        try {
+            const value = req.params.value
+            const userId = req.body.userId
+
+            await userService.editSpeciality(userId, value)
+            res.sendStatus(200)
+
+        } catch (e) {
+            // @ts-ignore
+            res.json(e.message)
+        }
+    }
+
+    async editLanguages(req: Request, res: Response, next: NextFunction) {
+        try {
+            const value = req.params.value
+            const userId = req.body.userId
+
+            await userService.editLanguages(userId, value)
+            res.sendStatus(200)
+
+        } catch (e) {
+            // @ts-ignore
+            res.json(e.message)
+        }
+    }
+
+    async editDateOfBirth(req: Request, res: Response, next: NextFunction) {
+        try {
+            const value = req.params.value
+            const userId = req.body.userId
+
+            await userService.editDateOfBirth(userId, value)
+            res.sendStatus(200)
+
+        } catch (e) {
+            // @ts-ignore
+            res.json(e.message)
         }
     }
 }
