@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button, ButtonSizes, ButtonTypes, Colours, InputForm, InputFormTypes, LightThemeColours, Title, TitleSizes, useTypedSelector } from '@packages/shared'
 import { SignFormTypes } from '../../../../lib/enum/signFormTypes'
 import { Link } from 'react-router-dom'
 import './index.sass'
 import { ThemeTypes } from '../../../../lib/enum/themeTypes'
+import { sendLoginData } from '../lib/sendLoginData'
+import { sendRegData } from '../lib/sengRegData'
+import { useDispatch } from 'react-redux'
 
 interface SignFormProps {
     type: SignFormTypes,
@@ -16,9 +20,36 @@ interface SignFormProps {
 }
 
 export const SignForm: React.FC<SignFormProps> = ({ type, items }) => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const theme = useTypedSelector(state => state.themeReducer.theme)
     const title = (type == SignFormTypes.signIn) ? 'Sign In': 'Sign Up'
     const textThemeStyle = (theme == ThemeTypes.DARK) ? Colours.text_color: LightThemeColours.text_color
+
+    function sendData () {
+        if (type == SignFormTypes.signIn) {
+            sendLoginData(
+                localStorage.getItem('signInEmail') as string,
+                localStorage.getItem('signInPassword') as string,
+                dispatch
+            ).then(result => {
+                if (result.status !== undefined) navigate('/')
+            })
+        }
+        else {
+            sendRegData(
+                localStorage.getItem('signInName'),
+                localStorage.getItem('signInSurname'),
+                localStorage.getItem('signInEmail'),
+                localStorage.getItem('signInAccoutType'),
+                localStorage.getItem('signInNumber'),
+                localStorage.getItem('signInPassword'),
+                dispatch
+            ).then(result => {
+                console.log(result)
+            })
+        }
+    }
 
     return (
         <div className="sign">
@@ -34,7 +65,7 @@ export const SignForm: React.FC<SignFormProps> = ({ type, items }) => {
                         required={item.required}
                     />
                 ))}
-                <Button type={ButtonTypes.active} size={ButtonSizes.medium} styles={{ padding: '18px', borderRadius: '16px', marginTop: '12px', width: '98%' }} value={title} />
+                <Button onClick={sendData} type={ButtonTypes.active} size={ButtonSizes.medium} styles={{ padding: '18px', borderRadius: '16px', marginTop: '12px', width: '98%' }} value={title} />
             </div>
             {
                 (type == SignFormTypes.signIn) ?

@@ -10,6 +10,8 @@
   "dependencies": {
     "@packages/build-config": "*",
     "@packages/shared": "*",
+    "@types/axios": "^0.14.0",
+    "axios": "^1.6.8",
     "react-redux": "^9.0.2",
     "react-router-dom": "^6.16.0"
   },

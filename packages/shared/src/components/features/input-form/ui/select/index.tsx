@@ -35,6 +35,7 @@ export const Selector: React.FC<SelectorProps> = ({ items }) => {
         optionsList.forEach(option => {
             function handler(e: MouseEvent) {
                 if (e.clientX !== 0 && e.clientY !== 0) {
+                    localStorage.setItem('signInAccoutType', this.children[1].textContent)
                     selectedValueElem.textContent = this.children[1].textContent
                     customSelectElem.classList.remove("active")
                     e.preventDefault()
@@ -54,8 +55,8 @@ export const Selector: React.FC<SelectorProps> = ({ items }) => {
                 </button>
                 <ul style={{ backgroundColor: dropDownThemeStyle, border: 'solid 1px ' + dropDownBorderThemeStyle }} className="select-dropdown">
                     {items.map(value => (
-                        <li key={String((Date.now() * Math.random())) + value}>
-                            <input className={"select-dropdown__input_" + theme.toLowerCase()} type="radio" id={ value } name="social-account" />
+                        <li className={"select-dropdown__item_" + theme.toLowerCase()} key={String((Date.now() * Math.random())) + value}>
+                            <input type="radio" id={ value } name="social-account" />
                             <label style={{ color: labelThemeStyle }} htmlFor={ value }>{ value }</label>
                         </li>
                     ))}

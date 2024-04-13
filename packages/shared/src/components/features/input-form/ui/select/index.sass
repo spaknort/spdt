@@ -46,24 +46,17 @@
     cursor: pointer
     display: flex
     padding: 4px
+    transition: .7s ease
 
 .select-dropdown li label 
     width: 100%
     padding: 8px 10px
     cursor: pointer
 
-.select-dropdown li:hover,
-.select-dropdown_input_dark:checked ~ label 
+.select-dropdown__item_dark:hover
     background-color: #111C44
 
-.select-dropdown_input_dark:focus ~ label 
-    background-color: #111C44
-
-.select-dropdown li:hover,
-.select-dropdown_input_light:checked ~ label 
-    background-color: #dae1f1
-
-.select-dropdown_input_light:focus ~ label 
+.select-dropdown__item_light:hover
     background-color: #dae1f1
 
 .select-dropdown input[type="radio"]

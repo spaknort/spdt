@@ -13,7 +13,8 @@ export const SignUp: React.FC = () => {
     return (
         <div className="sign-up">
             <SignForm type={SignFormTypes.signUp} items={[
-                { type: InputFormTypes.text, lable: 'Full Name', placeholder: 'Invanov Ivan Ivanovi', required: true },
+                { type: InputFormTypes.text, lable: 'Name', placeholder: 'Ivan', required: true },
+                { type: InputFormTypes.text, lable: 'Surname', placeholder: 'Invanov', required: true },
                 { type: InputFormTypes.email, lable: 'Email', placeholder: 'example@mail.com', required: true },
                 { type: InputFormTypes.selector, lable: 'Account Type', placeholder: 'NFT Designer/Purchaser/Admin', required: true },
                 { type: InputFormTypes.tel, lable: 'Number Phone', placeholder: '+7 (000) 000 00-00', required: true },

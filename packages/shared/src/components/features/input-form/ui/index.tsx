@@ -20,33 +20,54 @@ export const InputForm: React.FC<InputFormProps> = ({ type, lable, placeholder, 
     const [showPasswordState, setShowPasswordState] = useState<boolean>(false)
     const 
         [email, setEmail] = useState<string>(),
+        [text, setText] = useState<string>(),
         [password, setPassword] = useState<string>(''),
+        [number, setNumber] = useState<string>(''),
         [emailDirty, setEmailDirty] = useState<boolean>(),
+        [textDirty, setTextDirty] = useState<boolean>(),
         [passwordDirty, setPasswordDirty] = useState<boolean>(),
-        [emailError, setEmailError] = useState<string>('Email не может быть пустым'),
-        [passwordError, setPasswordErorr] = useState<string>('Password не может быть пустым')
+        [numberDirty, setNumberDirty] = useState<boolean>(),
+        [emailError, setEmailError] = useState<string>('Поле email не может быть пустым'),
+        [textError, setTextError] = useState<string>('Это поле не может быть пустым'),
+        [passwordError, setPasswordErorr] = useState<string>('Поле password не может быть пустым'),
+        [numberError, setNumberErorr] = useState<string>('Не указан номер телефна')
 
     function blurHandler(e: FocusEvent<HTMLInputElement>) {
-        switch (e.target.type) {
-            case InputFormTypes.email:
-                setEmailDirty(true)
-            break
-            case InputFormTypes.password:
-                setPasswordDirty(true)
-            break
-        }
+        if (e.target.type == InputFormTypes.email) setEmailDirty(true)
+        if (e.target.type == InputFormTypes.password) setPasswordDirty(true)
+        if (e.target.type == InputFormTypes.text) setTextDirty(true)
+        if (e.target.type == InputFormTypes.tel) setNumberDirty(true)
     }
 
     function emailHandler(e: ChangeEvent<HTMLInputElement>) {
         setEmail(e.target.value)
+        localStorage.setItem('signInEmail', e.target.value)
 
         const regexp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         (!regexp.test( String(e.target.value).toLocaleLowerCase() )) ? setEmailError('Введен не корректный email'): setEmailError('')
     }
 
+    function textHandler(e: ChangeEvent<HTMLInputElement>) {
+        setText(e.target.value)
+        if (lable == 'Name') { localStorage.setItem('signInName', e.target.value) }
+        if (lable == 'Surname') { localStorage.setItem('signInSurname', e.target.value) }
+
+        if (e.target.value == '') setTextError('Это поле не может быть пустым')
+        else setTextError('')
+    }
+
     function passwordHandler(e: ChangeEvent<HTMLInputElement>) {
         setPassword(e.target.value);
+        localStorage.setItem('signInPassword', e.target.value);
         (e.target.value.length < 8) ? setPasswordErorr('Пароль должен быть длинее восьми сиволов'): setPasswordErorr('')
+    }
+
+    function numberHandler(e: ChangeEvent<HTMLInputElement>) {
+        setNumber(e.target.value);
+        localStorage.setItem('signInNumber', e.target.value);
+
+        const regexp = /^([+]?[0-9\s-\(\)]{3,25})*$/i;
+        (!regexp.test( String(e.target.value).toLocaleLowerCase() )) ? setNumberErorr('Введен не корректный номер'): setNumberErorr('')
     }
 
     return (
@@ -55,13 +76,15 @@ export const InputForm: React.FC<InputFormProps> = ({ type, lable, placeholder, 
                 { lable }
                 { (required) ? <span style={{ color: labelThemeStyle }}> *</span>: '' }
                 { (emailDirty && emailError) ? <span style={{ color: labelThemeStyle }}>{ emailError }</span>: '' }
+                { (textDirty && textError) ? <span style={{ color: labelThemeStyle }}>{ textError }</span>: '' }
                 { (passwordDirty && passwordError) ? <span style={{ color: labelThemeStyle }}>{ passwordError }</span>: '' }
+                { (numberDirty && numberError) ? <span style={{ color: labelThemeStyle }}>{ numberError }</span>: '' }
             </label>
             {
                 (type == InputFormTypes.email) ?
                     <input onChange={ emailHandler } onBlur={ blurHandler } style={{ color: inputThemeStyle }} value={email} type={type} placeholder={placeholder} className={"input-form__input input-form__input_" + theme.toLowerCase()} />:
                 (type == InputFormTypes.text) ?
-                    <input style={{ color: inputThemeStyle }} type={type} placeholder={placeholder} className={"input-form__input input-form__input_" + theme.toLowerCase()} />:
+                    <input onChange={ textHandler } style={{ color: inputThemeStyle }} onBlur={ blurHandler } value={text} type={type} placeholder={placeholder} className={"input-form__input input-form__input_" + theme.toLowerCase()} />:
                 (type == InputFormTypes.password) ? 
                     <div className='input-form__container'>
                         <input onChange={ passwordHandler } onBlur={ blurHandler } style={{ color: inputThemeStyle }} value={password} type={(!showPasswordState) ? 'password': 'text'} placeholder={placeholder} className={"input-form__input input-form__input_" + theme.toLowerCase()} />
@@ -70,7 +93,7 @@ export const InputForm: React.FC<InputFormProps> = ({ type, lable, placeholder, 
                 (type == InputFormTypes.selector) ?
                     <Selector items={ userTypes }/>:
                 (type == InputFormTypes.tel) ?
-                    <input style={{ color: inputThemeStyle }} type={type} placeholder={placeholder} pattern="^[+]?[0-9]{9,12}$" className={"input-form__input input-form__input_" + theme.toLowerCase()} />:
+                    <input onChange={ numberHandler } onBlur={ blurHandler } style={{ color: inputThemeStyle }} value={number} type={type} placeholder={placeholder} pattern="^[+]?[0-9]{9,12}$" className={"input-form__input input-form__input_" + theme.toLowerCase()} />:
                 ''
             }
         </div>

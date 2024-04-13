@@ -4,6 +4,7 @@ import * as uuid from 'uuid'
 import { mailService } from "./mail-service"
 import { tokenService } from "./token-service"
 import UserDto from "../dto/user-dto"
+import bcrypt from 'bcrypt'
 
 class UserService {
     async registration(
@@ -23,13 +24,13 @@ class UserService {
         const activationLink = `${process.env.API_URL}/api/activate/${uuid.v4()}`
         const hashPassword = await hash(password, 3)
         await connection.query(
-            `INSERT INTO users (name, surname, password, email, number_phone, text, speciality, avatar, activation_link)
-                VALUES ('${name}', '${surname}', '${hashPassword}', '${email}', '${number_phone}', '${text}', '${speciality}', '${avatar}', '${activationLink}')
+            `INSERT INTO users (name, surname, avatar, text, speciality, email, number_phone, password, activation_link)
+                VALUES ('${name}', '${surname}', '${avatar}', '${text}', '${speciality}', '${email}', '${number_phone}', '${hashPassword}', '${activationLink}')
         `)
-        const findedUser = await connection.query(`SELECT * FROM users WHERE number_phone='${number_phone}'`)
-        
+        const [result, fields] = await connection.query(`SELECT * FROM users WHERE number_phone='${number_phone}'`)
         // @ts-ignore
-        const userDto = new UserDto({ email, id: findedUser[0][0]?.id, isActivated: findedUser[0][0]?.isActivated })
+        const findedUser = result[0]
+        const userDto = new UserDto({ email, id: findedUser?.id, isActivated: findedUser?.isActivated })
         const tokens  = tokenService.generateTokens({ ...userDto })
 
         await tokenService.saveToken(userDto.id, tokens.refreshToken)
@@ -44,10 +45,60 @@ class UserService {
     async activate(activationLink: string) {
         const fullActivationLink = `${process.env.API_URL}/api/activate/${activationLink}`
         console.log(fullActivationLink)
-        const user = await connection.query(`SELECT * FROM users WHERE activation_link='${fullActivationLink}'`)
+        const [result, fields] = await connection.query(`SELECT * FROM users WHERE activation_link='${fullActivationLink}'`)
         // @ts-ignore
-        if (user[0][0] == undefined) { throw new Error('Неккоректная ссылка для активации акаунта') }
-        connection.query(`UPDATE users SET isActivated=1 WHERE activation_link='${fullActivationLink}' `)
+        const user = result[0]
+        if (user == undefined) { throw new Error('Неккоректная ссылка для активации акаунта') }
+        connection.query(`UPDATE users SET is_activated=1 WHERE activation_link='${fullActivationLink}' `)
+    }
+
+    async login(email: string, password: string) {
+        const [result, fields] = await connection.query(`SELECT * FROM users WHERE email='${email}'`)
+        // @ts-ignore
+        const user = result[0]
+        if (!user) { throw new Error('Пользователь с таким email не найден') }
+
+        const isPasswordsEquls = await bcrypt.compare(password, user.password)
+        if (!isPasswordsEquls) { throw new Error('Неверный пароль') }
+
+        const userDTO = new UserDto(user)
+        const tokens = tokenService.generateTokens({ ...userDTO })
+
+        await tokenService.saveToken(userDTO.id, tokens.refreshToken)
+        return {
+            ...tokens,
+            user: userDTO
+        }
+    }
+
+    async logout(refreshToken: string) {
+        await tokenService.removeToken(refreshToken)
+    }
+
+    async refresh(refreshToken: string) {
+        if (!refreshToken) { throw new Error('Пользователь не авторизован') }
+
+        const userData: any = tokenService.validateRefreshToken(refreshToken)
+        const tokenFromDb = await tokenService.findToken(refreshToken)
+        
+        if(!userData || !tokenFromDb) { throw new Error('Пользователь не авторизован') }
+        else {
+            const user = await connection.query(`SELECT * FROM users WHERE id=${userData.id}`)
+            const userDTO = new UserDto(user)
+            const tokens = tokenService.generateTokens({ ...userDTO })
+
+            await tokenService.saveToken(userDTO.id, tokens.refreshToken)
+            return {
+                ...tokens,
+                user: userDTO
+            }
+        }
+    }
+
+    async getAllUsers() {
+        const [result, fields] = await connection.query(`SELECT * FROM users`)
+        // @ts-ignore
+        return result[0]
     }
 }
 

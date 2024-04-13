@@ -5,7 +5,7 @@ interface IUploadFileDefaultState {
 }
 
 const uploadFileDefaultState: IUploadFileDefaultState = {
-    data: JSON.parse(localStorage.getItem('uploadFiles')) || []
+    data: JSON.parse(localStorage.getItem('uploadFiles') as string) || []
 }
 
 export const uploadFileReducer = (state = uploadFileDefaultState, action: UploadFileAction) => {
