@@ -1,4 +1,4 @@
 export enum ProductsSectionTypes {
-    recently = 'recently',
-    trending = 'trending'
+    RECENTLY = 'recently',
+    TRENDING = 'trending'
 }

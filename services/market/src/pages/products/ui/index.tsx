@@ -20,8 +20,8 @@ export const Products: FC = () => {
             <div className="contents">
                 <Header title={titleForCurrentPage} subTitle={`Pages / ${titleForCurrentPage}`} />
                 <main style={{ background: mainThemeStyle }} className="main">
-                    <ProductsSection title="Trending NFTs" numberOfDisplayedProducts={4} scrollSpeed={3} type={ProductsSectionTypes.trending} />
-                    <ProductsSection title="Recently Added" numberOfDisplayedProducts={4} scrollSpeed={1} type={ProductsSectionTypes.recently} />
+                    <ProductsSection title="Trending NFTs" numberOfDisplayedProducts={4} scrollSpeed={3} type={ProductsSectionTypes.TRENDING} />
+                    <ProductsSection title="Recently Added" numberOfDisplayedProducts={4} scrollSpeed={1} type={ProductsSectionTypes.RECENTLY} />
                 </main>
             </div>
         </div>

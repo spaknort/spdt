@@ -121,7 +121,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ title, numberO
             price: '0.91'
         }
     ]
-    const products = (type == ProductsSectionTypes.recently) ? recentlyProducts: trendingProducts
+    const products = (type == ProductsSectionTypes.RECENTLY) ? recentlyProducts: trendingProducts
     const cardsRef = useRef<HTMLDivElement | null>(null)
     const navigate = useNavigate()
 

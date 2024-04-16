@@ -19,7 +19,7 @@ export const UserInfo: React.FC = () => {
     ]
 
     useEffect(() => {
-        console.log(userFullData)
+        console.log(userFullData, userFullData.speciality)
     }, [userFullData])
 
     return (
