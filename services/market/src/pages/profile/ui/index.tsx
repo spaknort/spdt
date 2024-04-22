@@ -11,6 +11,7 @@ import { UserProjects } from "@/widgets/user-projects"
 import { UserNotifications } from "@/widgets/user-notifications"
 import { useDispatch } from "react-redux"
 import { getUserById } from "../api/getUserById"
+import { SendFiles } from "@/widgets/send-files"
 
 export const Profile: FC = () => {
     const dispatch = useDispatch()
@@ -34,6 +35,7 @@ export const Profile: FC = () => {
 
     return (
         <div className="profile">
+            <SendFiles />
             <Aside items={ NavigationPanel } />
             <div className="contents">
                 <Header title={ titleForCurrentPage } subTitle={`Pages / ${titleForCurrentPage}`} />

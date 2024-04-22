@@ -25,6 +25,10 @@ export const rulesWebpack = (options: BuildOptions): ModuleOptions['rules'] => {
             use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']        
         },
         {
+            test: /\.css/,
+            use: [MiniCssExtractPlugin.loader, 'css-loader']
+        },
+        {
             test: /\.svg$/i,
             issuer: /\.[jt]sx?$/,
             use: [{
