@@ -8,10 +8,12 @@ interface ButtonProps {
     size: ButtonSizes,
     styles?: CSSProperties,
     disabled?: boolean,
+    className?: string,
+    id?: string,
     onClick?: () => void
 }
 
-export const Button: React.FC<ButtonProps> = ({ value, type, size, styles, disabled, onClick }) => {
+export const Button: React.FC<ButtonProps> = ({ value, type, size, styles, disabled, className, id, onClick }) => {
     const localStyle: CSSProperties = {
         backgroundColor: (type == ButtonTypes.active) ? Colours.active_color:
             (type == ButtonTypes.inactive) ? 'transparent': '',
@@ -24,6 +26,6 @@ export const Button: React.FC<ButtonProps> = ({ value, type, size, styles, disab
     }
 
     return (
-        <input disabled={disabled} onClick={onClick} style={{ ...localStyle, ...styles }} className={'button button_' + size} type="button" value={value} />
-    )
+        <input disabled={disabled} onClick={onClick} style={{ ...localStyle, ...styles }} id={id} className={className + ' button button_' + size} type="button" value={value} />
+    ) 
 }

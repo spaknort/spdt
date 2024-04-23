@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FocusEvent, ChangeEvent } from 'react'
-import { InputFormTypes, LightThemeColours, generalSvgNames, useTypedSelector, userTypes } from '@packages/shared'
+import { InputTypes, LightThemeColours, generalSvgNames, useTypedSelector, userTypes } from '@packages/shared'
 import { Colours } from '@packages/shared'
 import { GeneralSvgSelector } from '@packages/shared'
 import { Selector } from './select'
@@ -7,7 +7,7 @@ import './index.sass'
 import { ThemeTypes } from '../../../../lib/enum/themeTypes'
 
 interface InputFormProps {
-    type: InputFormTypes
+    type: InputTypes
     lable: string,
     placeholder: string,
     required: boolean,
@@ -33,10 +33,10 @@ export const InputForm: React.FC<InputFormProps> = ({ type, lable, placeholder, 
         [numberError, setNumberErorr] = useState<string>('Не указан номер телефна')
 
     function blurHandler(e: FocusEvent<HTMLInputElement>) {
-        if (e.target.type == InputFormTypes.email) setEmailDirty(true)
-        if (e.target.type == InputFormTypes.password) setPasswordDirty(true)
-        if (e.target.type == InputFormTypes.text) setTextDirty(true)
-        if (e.target.type == InputFormTypes.tel) setNumberDirty(true)
+        if (e.target.type == InputTypes.EMAIL) setEmailDirty(true)
+        if (e.target.type == InputTypes.PASSWORD) setPasswordDirty(true)
+        if (e.target.type == InputTypes.TEXT) setTextDirty(true)
+        if (e.target.type == InputTypes.TEL) setNumberDirty(true)
     }
 
     function emailHandler(e: ChangeEvent<HTMLInputElement>) {
@@ -81,18 +81,18 @@ export const InputForm: React.FC<InputFormProps> = ({ type, lable, placeholder, 
                 { (numberDirty && numberError) ? <span style={{ color: labelThemeStyle }}>{ numberError }</span>: '' }
             </label>
             {
-                (type == InputFormTypes.email) ?
+                (type == InputTypes.EMAIL) ?
                     <input onChange={ emailHandler } onBlur={ blurHandler } style={{ color: inputThemeStyle }} value={email} type={type} placeholder={placeholder} className={"input-form__input input-form__input_" + theme.toLowerCase()} />:
-                (type == InputFormTypes.text) ?
+                (type == InputTypes.TEXT) ?
                     <input onChange={ textHandler } style={{ color: inputThemeStyle }} onBlur={ blurHandler } value={text} type={type} placeholder={placeholder} className={"input-form__input input-form__input_" + theme.toLowerCase()} />:
-                (type == InputFormTypes.password) ? 
+                (type == InputTypes.PASSWORD) ? 
                     <div className='input-form__container'>
                         <input onChange={ passwordHandler } onBlur={ blurHandler } style={{ color: inputThemeStyle }} value={password} type={(!showPasswordState) ? 'password': 'text'} placeholder={placeholder} className={"input-form__input input-form__input_" + theme.toLowerCase()} />
                         <GeneralSvgSelector styles={{ cursor: 'pointer' }} onClick={() => setShowPasswordState(!showPasswordState)} className='input-form__eye' svgName={(!showPasswordState) ? generalSvgNames.eye: generalSvgNames.crossedEye} params={{ width: 22, height: 20, fill: '#A3AED0', stroke: '#A3AED0' }} />
                     </div>:
-                (type == InputFormTypes.selector) ?
+                (type == InputTypes.SELECTOR) ?
                     <Selector items={ userTypes }/>:
-                (type == InputFormTypes.tel) ?
+                (type == InputTypes.TEL) ?
                     <input onChange={ numberHandler } onBlur={ blurHandler } style={{ color: inputThemeStyle }} value={number} type={type} placeholder={placeholder} pattern="^[+]?[0-9]{9,12}$" className={"input-form__input input-form__input_" + theme.toLowerCase()} />:
                 ''
             }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, ButtonSizes, ButtonTypes, Colours, InputForm, InputFormTypes, LightThemeColours, Title, TitleSizes, useTypedSelector } from '@packages/shared'
+import { Button, ButtonSizes, ButtonTypes, Colours, InputForm, InputTypes, LightThemeColours, Title, TitleSizes, useTypedSelector } from '@packages/shared'
 import { SignFormTypes } from '../../../../lib/enum/signFormTypes'
 import { Link } from 'react-router-dom'
 import './index.sass'
@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux'
 interface SignFormProps {
     type: SignFormTypes,
     items: Array<{
-        type: InputFormTypes
+        type: InputTypes
         lable: string,
         placeholder: string,
         required: boolean
@@ -38,12 +38,12 @@ export const SignForm: React.FC<SignFormProps> = ({ type, items }) => {
         }
         else {
             sendRegData(
-                localStorage.getItem('signInName'),
-                localStorage.getItem('signInSurname'),
-                localStorage.getItem('signInEmail'),
-                localStorage.getItem('signInAccoutType'),
-                localStorage.getItem('signInNumber'),
-                localStorage.getItem('signInPassword'),
+                localStorage.getItem('signInName') as string,
+                localStorage.getItem('signInSurname') as string,
+                localStorage.getItem('signInEmail') as string,
+                localStorage.getItem('signInAccoutType') as string,
+                localStorage.getItem('signInNumber') as string,
+                localStorage.getItem('signInPassword') as string,
                 dispatch
             ).then(result => {
                 console.log(result)

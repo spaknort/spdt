@@ -2,7 +2,7 @@ import React from "react";
 import { svgNames } from "../lib/enums/svgNames";
 import { INavigationItem } from "../lib/interfaces/INavigationItem";
 import { SvgSelector } from "../ui/svgSelector";
-import { useTypedSelector } from "@packages/shared";
+import { InputTypes, useTypedSelector } from "@packages/shared";
 
 const NavigationPanel: Array<INavigationItem> = [
     {
@@ -18,5 +18,18 @@ const NavigationPanel: Array<INavigationItem> = [
         path: '/profile'
     }
 ]
+
+interface ISendFileField {
+    type: InputTypes,
+    placeholder: string,
+    label: string
+}
+
+export const SendFileFields: Array<ISendFileField> = [
+    { type: InputTypes.TEXT, placeholder: 'The product`s name', label: 'Title' },
+    { type: InputTypes.FILE, placeholder: 'Select a file', label: 'File' },
+    { type: InputTypes.TEXT, placeholder: 'Specify price', label: 'Price' }
+]
+
 
 export default NavigationPanel

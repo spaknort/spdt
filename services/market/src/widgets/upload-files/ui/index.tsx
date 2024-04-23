@@ -6,15 +6,19 @@ import { parseFiles } from "../lib/parseFiles"
 import { useDispatch } from "react-redux"
 import { UploadFile } from "../components/upload-file"
 
-export const UploadFiles: React.FC = () => {
+interface UploadFilesProps {
+    // setShowWidget: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const UploadFiles: React.FC<UploadFilesProps> = ({  }) => {
     const dispatch = useDispatch()
     const uploadFiles = useTypedSelector(state => state.uploadFileReducer.data)
     const theme = useTypedSelector(state => state.themeReducer.theme)
     const uploadFilesThemeStyle = (theme == ThemeTypes.DARK) ? Colours.block_color: LightThemeColours.block_color
     const uploadFilesLeftThemeStyle = (theme == ThemeTypes.DARK) ? Colours.background_color: LightThemeColours.background_color
-    const [isFileUpload, setIsFileUpload] = useState<boolean>(false)
+    const [isFileUpload, setIsFileUpload] = useState<boolean>((uploadFiles.length > 0) ? true: false)
 
-    useEffect(() => { dispatch({type: UploadFileActionTypes.ADD_UPLOAD_FILE, data: []}) }, [])
+    useEffect(() => { dispatch({type: UploadFileActionTypes.ADD_UPLOAD_FILE, data: []}); console.log(uploadFiles) }, [])
     useEffect(() => { if (uploadFiles.length == 0) setIsFileUpload(false) }, [uploadFiles])
 
     return (
@@ -46,7 +50,7 @@ export const UploadFiles: React.FC = () => {
             <div className="upload-files__right">
                 <Title value="Complete your profile" size={TitleSizes.medium} />
                 <Text style={{ width: '250px', marginTop: '6px' }} value="Stay on the pulse of distributed projects with an anline whiteboard to plan, coordinate and discuss" size={1} />
-                <Button styles={{ marginTop: '52px' }} value="Publish now" size={ButtonSizes.small} type={ButtonTypes.active} />
+                <Button onClick={() => dispatch({ type: UploadFileActionTypes.SET_SHOW_WIDGET, showWidget: true })} disabled={(uploadFiles.length <= 0) ? true: false} styles={{ marginTop: '52px' }} value="Publish now" size={ButtonSizes.small} type={ButtonTypes.active} />
             </div>
         </div>
     )

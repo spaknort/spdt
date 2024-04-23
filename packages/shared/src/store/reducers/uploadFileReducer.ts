@@ -1,11 +1,13 @@
 import { IParsedFile, UploadFileAction, UploadFileActionTypes } from '../../index'
 
 interface IUploadFileDefaultState {
-    data: Array<IParsedFile>
+    data: Array<IParsedFile>,
+    showWidget: boolean
 }
 
 const uploadFileDefaultState: IUploadFileDefaultState = {
-    data: JSON.parse(localStorage.getItem('uploadFiles') as string) || []
+    data: JSON.parse(localStorage.getItem('uploadFiles') as string) || [],
+    showWidget: false
 }
 
 export const uploadFileReducer = (state = uploadFileDefaultState, action: UploadFileAction) => {
@@ -16,7 +18,10 @@ export const uploadFileReducer = (state = uploadFileDefaultState, action: Upload
         case UploadFileActionTypes.DELETE_UPLOAD_FILE:
             const newFilteredStateData = state.data.filter(item => item.name != action.name)
             localStorage.setItem('uploadFiles', JSON.stringify(newFilteredStateData))
-            return { ...state, data: newFilteredStateData }
+
+            return { ...state, data: newFilteredStateData}
+        case UploadFileActionTypes.SET_SHOW_WIDGET:
+            return { ...state, showWidget: action.showWidget }
         default: return { ...state }
     }
 }

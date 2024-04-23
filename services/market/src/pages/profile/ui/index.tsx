@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react"
+import React, { FC, useEffect, useState } from "react"
 import './index.sass'
 import { Aside, Colours, Header, IFullUser, LightThemeColours, UserActionTypes, checkAuth, getTitleForCurrentPage, helperForTheme, useTypedSelector } from "@packages/shared"
 import { ThemeTypes } from "@packages/shared/src/lib/enum/themeTypes"
@@ -24,13 +24,8 @@ export const Profile: FC = () => {
     useEffect(() => helperForTheme(theme, backgroundThemeStyle), [backgroundThemeStyle])
 
     useEffect(() => {
-        if (localStorage.getItem('token')) {
-            checkAuth(dispatch)
-        }
-        getUserById(userInfo.id).then((result: IFullUser) => {
-            console.log(result)
-            dispatch({ type: UserActionTypes.SET_USER_FULL_INFO, userFullInfo: result })
-        })
+        if (localStorage.getItem('token')) checkAuth(dispatch)
+        getUserById(userInfo.id).then((result: IFullUser) => dispatch({ type: UserActionTypes.SET_USER_FULL_INFO, userFullInfo: result }))
     }, [])
 
     return (

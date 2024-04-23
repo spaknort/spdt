@@ -4,5 +4,6 @@ import { IParsedFile } from "../IParsedFile";
 export interface UploadFileAction {
     type: UploadFileActionTypes,
     name: string,
-    data: Array<IParsedFile>
+    data: Array<IParsedFile>,
+    showWidget: boolean
 }
